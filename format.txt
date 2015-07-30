@@ -1,0 +1,24 @@
+Work Title,Number of Chapters
+Chapter Title,Number of Subchapters
+Subchapter Title,Post Number
+Subchapter Title,Post Number
+Subchapter Title,Post Number
+Subchapter Title,Post Number
+Subchapter Title,Post Number
+...
+Chapter Title,Number of Subchapters
+Subchapter Title,Post Number
+...
+
+
+Example:
+Atonement,3
+Arc 1: Liability,6
+1.01,15236116
+1.02,
+1.03,
+1.04,
+1.05,
+Interlude 1 - Wards,
+Arc 2: Rise,7
+Arc 3: Institution,6
