@@ -1,14 +1,12 @@
-infof = file("temp.txt","r")
-# temp.txt stores the data that is needed to process this post.
-# It's 6 lines: Post Number, Source File, Target File,
+import sys
+# 6 Arguments: Post Number, Source File, Target File,
 # Previous File (Blank if none), Index File, Next File (Blank if none)
-postnum = int(infof.next())
-source = infof.next().strip()
-target = infof.next().strip()
-prevf = infof.next().strip()
-indexf = infof.next().strip()
-nextf = infof.next().strip()
-infof.close()
+postnum = sys.argv[1]
+source = sys.argv[2]
+target = sys.argv[3]
+prevf = sys.argv[4]
+indexf = sys.argv[5]
+nextf = sys.argv[6]
 filein = file(source,"r")
 fileout = file(target,"w")
 fileout.write('<a href='+prevf+'>&lt;&lt;</a>  ')
