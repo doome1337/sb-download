@@ -1,24 +1,26 @@
 Work Title,Number of Chapters
-Chapter Title,Number of Subchapters
-Subchapter Title,Post Number
-Subchapter Title,Post Number
-Subchapter Title,Post Number
-Subchapter Title,Post Number
-Subchapter Title,Post Number
+Chapter Title,Number of Subchapters,File Prefix
+Subchapter Title,Post Number,File Suffix
+Subchapter Title,Post Number,File Suffix
+Subchapter Title,Post Number,File Suffix
+Subchapter Title,Post Number,File Suffix
+Subchapter Title,Post Number,File Suffix
 ...
-Chapter Title,Number of Subchapters
-Subchapter Title,Post Number
+Chapter Title,Number of Subchapters,File Prefix
+Subchapter Title,Post Number,File Suffix
 ...
 
 
 Example:
 Atonement,3
-Arc 1: Liability,6
-1.01,15236116
-1.02,
-1.03,
-1.04,
-1.05,
-Interlude 1 - Wards,
-Arc 2: Rise,7
-Arc 3: Institution,6
+Arc 1: Liability,6,01
+1.01,15236116,01
+1.02,,02
+1.03,,03
+1.04,,04
+1.05,,05
+Interlude 1 - Wards,0i
+Arc 2: Rise,7,02
+Arc 3: Institution,6,03
+
+1.01 would be 01_01.html
