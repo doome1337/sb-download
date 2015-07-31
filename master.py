@@ -31,6 +31,7 @@ datafname = sys.argv[1]
 # This is the file we are getting our data from.
 dataf = file(datafname,"r")
 maindata = dataf.next().strip().split(',')
+dirname = maindata[2]+"/"
 try:
     os.mkdir(maindata[2])
 except:
@@ -45,9 +46,9 @@ for i in range(maindata[1]):
     fulldata[i] = [0]*fullchdata[i][1]
     for j in range(fullchdata[i][1]):
         fulldata[i][j] = dataf.next().strip().split(',')
-        fulldata[i][j][2] = maindata[2]+"/"+fullchdata[i][2]+"_"+fulldata[i][j][2]+".html"
-indexfname = maindata[2]+'/index.html'
-indexf = file(indexfname,"w")
+        fulldata[i][j][2] = fullchdata[i][2]+"_"+fulldata[i][j][2]+".html"
+indexfname = 'index.html'
+indexf = file(dirname+indexfname,"w")
 indexf.write('<b><u>'+maindata[0]+'</u></b><br>\n<br>\n')
 for i in range(maindata[1]):
     indexf.write('<u>'+fullchdata[i][0]+'</u><br>')
@@ -67,8 +68,8 @@ for i in range(maindata[1]):
                 nextf = fulldata[i+1][0][2]
         else:
             nextf = fulldata[i][j+1][2]
-        #trim(fulldata[i][j][1],"temp.html",fulldata[i][j][2],prevf,indexfname,nextf)
+        #trim(fulldata[i][j][1],"temp.html",dirname+fulldata[i][j][2],prevf,indexfname,nextf)
         indexf.write('<a href='+fulldata[i][j][2]+'>'+fulldata[i][j][0]+'</a><br>')
     indexf.write('<br>')
-os.remove('temp.html')
+#os.remove('temp.html')
 indexf.close()
