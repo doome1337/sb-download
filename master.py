@@ -68,7 +68,7 @@ for i in range(maindata[1]):
         else:
             nextf = fulldata[i][j+1][2]
         #trim(fulldata[i][j][1],"temp.html",fulldata[i][j][2],prevf,indexfname,nextf)
-        os.rm()
         indexf.write('<a href='+fulldata[i][j][2]+'>'+fulldata[i][j][0]+'</a><br>')
     indexf.write('<br>')
+os.remove('temp.html')
 indexf.close()
