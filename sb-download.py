@@ -27,7 +27,10 @@ def trim(postnum,source,target,prevf,indexf,nextf):
     filein.close()
     fileout.close()
 
-datafname = sys.argv[1]
+datafname = sys.argv[-1]
+force_update = False
+if "-f" in sys.argv:
+    force_update = True
 # This is the file we are getting our data from.
 dataf = file(datafname,"r")
 maindata = dataf.next().strip().split(',')
@@ -54,7 +57,6 @@ for i in range(maindata[1]):
     indexf.write('<u>'+fullchdata[i][0]+'</u><br>')
     indexf.close()
     for j in range(fullchdata[i][1]):
-        os.system('wget -q -O temp.html -- https://forums.spacebattles.com/posts/'+fulldata[i][j][1])
         if j == 0:
             if i == 0:
                 prevf = "-"
@@ -69,7 +71,18 @@ for i in range(maindata[1]):
                 nextf = fulldata[i+1][0][2]
         else:
             nextf = fulldata[i][j+1][2]
-        trim(fulldata[i][j][1],"temp.html",dirname+fulldata[i][j][2],prevf,indexfname,nextf)
+        if not force_update and nextf != "-":
+            try:
+                tempf = file(dirname+nextf,"r")
+                tempf.close()
+                continue
+            except:
+                print "Downloading " + fulldata[i][j][0] + "... ",
+                os.system('wget -q -O temp.html -- https://forums.spacebattles.com/posts/'+fulldata[i][j][1])
+                trim(fulldata[i][j][1],"temp.html",dirname+fulldata[i][j][2],prevf,indexfname,nextf)
+        else:
+            os.system('wget -q -O temp.html -- https://forums.spacebattles.com/posts/'+fulldata[i][j][1])
+            trim(fulldata[i][j][1],"temp.html",dirname+fulldata[i][j][2],prevf,indexfname,nextf)
         indexf = file(dirname+indexfname,"a")
         indexf.write('<a href='+fulldata[i][j][2]+'>'+fulldata[i][j][0]+'</a><br>')
         print fulldata[i][j][0] + " Complete."
