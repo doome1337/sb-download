@@ -52,8 +52,9 @@ indexf = file(dirname+indexfname,"w")
 indexf.write('<b><u>'+maindata[0]+'</u></b><br>\n<br>\n')
 for i in range(maindata[1]):
     indexf.write('<u>'+fullchdata[i][0]+'</u><br>')
+    indexf.close()
     for j in range(fullchdata[i][1]):
-        os.system('wget -O temp.html -- https://forums.spacebattles.com/posts/'+fulldata[i][j][1])
+        os.system('wget -q -O temp.html -- https://forums.spacebattles.com/posts/'+fulldata[i][j][1])
         if j == 0:
             if i == 0:
                 prevf = "-"
@@ -69,7 +70,9 @@ for i in range(maindata[1]):
         else:
             nextf = fulldata[i][j+1][2]
         trim(fulldata[i][j][1],"temp.html",dirname+fulldata[i][j][2],prevf,indexfname,nextf)
+        indexf = file(dirname+indexfname,"a")
         indexf.write('<a href='+fulldata[i][j][2]+'>'+fulldata[i][j][0]+'</a><br>')
+        print fulldata[i][j][0] + " Complete."
     indexf.write('<br>')
 try:
     os.remove('temp.html')
