@@ -1,4 +1,4 @@
-Work Title,Number of Chapters
+Work Title,Number of Chapters,Folder Name
 Chapter Title,Number of Subchapters,File Prefix
 Subchapter Title,Post Number,File Suffix
 Subchapter Title,Post Number,File Suffix
@@ -12,15 +12,27 @@ Subchapter Title,Post Number,File Suffix
 
 
 Example:
-Atonement,3
+Atonement,3,atonement
 Arc 1: Liability,6,01
 1.01,15236116,01
 1.02,,02
 1.03,,03
 1.04,,04
 1.05,,05
-Interlude 1 - Wards,0i
+Interlude 1 - Wards,,0a
 Arc 2: Rise,7,02
+2.01,,01
+2.02,,02
+2.03,,03
+2.04,,04
+2.05,,05
+Interlude 2 - ,,0a
+Interlude 2B - ,,0b
 Arc 3: Institution,6,03
-
-1.01 would be 01_01.html
+3.01,,01
+3.02,,02
+3.03,,03
+3.04,,04
+3.05,,05
+Interlude 3 - ,,0a
+1.01 would be atonement/01_01.html
