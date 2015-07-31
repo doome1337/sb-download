@@ -41,7 +41,6 @@ try:
     os.mkdir(maindata[2])
 except:
     print "Warning! Directory already exists!"
-    print "Proceed anyway? (Y/N)"
 maindata[1] = int(maindata[1])
 fulldata = [0]*maindata[1]
 fullchdata = [0]*maindata[1]

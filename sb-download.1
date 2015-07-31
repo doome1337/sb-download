@@ -1,0 +1,72 @@
+.TH sb-download 1 "31 July 2015" "version 1.01"
+.SH NAME
+sb-download - Spacebattles post downloader.
+.SH SYNOPSIS
+.B python sb-download [-f]
+.I source_file
+.SH DESCRIPTION
+sb-download is a program to download specific posts 
+from the Spacebattles forums.
+It accepts a properly formatted file (see 
+.B FILE FORMAT
+below), and downloads the requested posts.
+These are then compiled into several interlinked html files,
+along with an index, 
+and stored in a chosen folder.
+.SH OPTIONS
+.TP
+.B -f
+Forces updates. By default, sb-download will not download a post
+if the next post in the source file is already downloaded.
+While this is useful for updating on-going stories
+or interrupted downloads,
+it is not always reliable.
+Using the
+.B -f
+tag indicates that all listed posts should be downloaded,
+regardless of whether or not they already are.
+.SH FILE FORMAT
+The first line is of the form
+.RS
+.B WORK NAME, NUMBER OF ARCS, FOLDER NAME
+.RE
+.B WORK NAME
+is used only for the index, and has no bearing on program operation.
+.B FOLDER NAME
+is the name of the folder where the downloaded posts will be saved.
+The next line is of the form
+.RS
+.B ARC NAME, NUMBER OF CHAPTERS, ARC TITLE
+.RE
+.B ARC NAME
+is, once again, used only for the index.
+.B ARC TITLE
+is the prefix that will be attached to the file names of all posts of this arc.
+The following
+.B NUMBER OF CHAPTERS
+lines are of the form
+.RS
+.B CHAPTER NAME, POST NUMBER, CHAPTER TITLE
+.RE
+.B CHAPTER NAME,
+once again, only affects the index.
+.B CHAPTER TITLE
+is the name of the file for this post.
+.B POST NUMBER
+determines which post to download,
+and is the most important part of the program.
+After
+.B NUMBER OF CHAPTERS
+lines of this form,
+another line of the form
+.RS
+.B ARC NAME, NUMBER OF CHAPTERS, ARC TITLE
+.RE
+appears.
+The cycle repeats.
+After 
+.B NUMBER OF ARCS
+such lines, the source file is assumed to have ended.
+.SH AUTHOR
+Doome1337
+.SH SEE ALSO
