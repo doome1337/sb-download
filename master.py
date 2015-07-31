@@ -53,7 +53,7 @@ indexf.write('<b><u>'+maindata[0]+'</u></b><br>\n<br>\n')
 for i in range(maindata[1]):
     indexf.write('<u>'+fullchdata[i][0]+'</u><br>')
     for j in range(fullchdata[i][1]):
-        #os.system('wget -O temp.html -- http://forums.spacebattles.com/posts/'+fulldata[i][j][1])
+        os.system('wget -O temp.html -- https://forums.spacebattles.com/posts/'+fulldata[i][j][1])
         if j == 0:
             if i == 0:
                 prevf = "-"
@@ -68,8 +68,11 @@ for i in range(maindata[1]):
                 nextf = fulldata[i+1][0][2]
         else:
             nextf = fulldata[i][j+1][2]
-        #trim(fulldata[i][j][1],"temp.html",dirname+fulldata[i][j][2],prevf,indexfname,nextf)
+        trim(fulldata[i][j][1],"temp.html",dirname+fulldata[i][j][2],prevf,indexfname,nextf)
         indexf.write('<a href='+fulldata[i][j][2]+'>'+fulldata[i][j][0]+'</a><br>')
     indexf.write('<br>')
-#os.remove('temp.html')
+try:
+    os.remove('temp.html')
+except:
+    print "Error! No temp.html found!"
 indexf.close()
