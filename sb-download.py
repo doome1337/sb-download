@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+#I love how that's a comment in Python, and a command otherwise.
 import sys
 import os
 def trim(postnum,source,target,prevf,indexf,nextf):
