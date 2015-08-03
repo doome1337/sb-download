@@ -31,8 +31,14 @@ def trim(postnum,source,target,prevf,indexf,nextf):
 
 datafname = sys.argv[-1]
 force_update = False
+source_site = "https://forums.spacebattles.com/posts/"
 if "-f" in sys.argv:
     force_update = True
+if "-v" in sys.argv:
+    source_site = "https://forums.sufficientvelocity.com/posts/"
+if "-fv" in sys.argv or "-vf" in sys.argv:
+    force_update = True
+    source_site = "https://forums.sufficientvelocity.com/posts/"
 # This is the file we are getting our data from.
 dataf = file(datafname,"r")
 maindata = dataf.next().strip().split(',')
@@ -78,7 +84,7 @@ for i in range(maindata[1]):
                 tempf.close()
             except:
                 print "Downloading " + fulldata[i][j][0] + "... "
-                os.system('wget -q -O temp.html -- https://forums.spacebattles.com/posts/'+fulldata[i][j][1])
+                os.system('wget -q -O temp.html -- '+source_site+fulldata[i][j][1])
                 trim(fulldata[i][j][1],"temp.html",dirname+fulldata[i][j][2],prevf,indexfname,nextf)
         else:
             print "Downloading " + fulldata[i][j][0] + "... "
