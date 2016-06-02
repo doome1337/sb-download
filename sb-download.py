@@ -1,10 +1,12 @@
 #!/usr/bin/env python
-#I love how that's a comment in Python, and a command otherwise.
+# I love how that's a comment in Python, and a command otherwise.
 import sys
 import os
-def trim(postnum,source,target,prevf,indexf,nextf):
-    filein = file(source,"r")
-    fileout = file(target,"w")
+
+
+def trim(postnum, source, target, prevf, indexf, nextf):
+    filein = file(source, "r")
+    fileout = file(target, "w")
     if prevf != "-":
         fileout.write('<a href='+prevf+'>&lt;&lt;</a>  ')
     fileout.write('<a href='+indexf+'>Index</a>  ')
@@ -12,13 +14,13 @@ def trim(postnum,source,target,prevf,indexf,nextf):
         fileout.write('<a href='+nextf+'>&gt;&gt;</a>')
     fileout.write('<br><br>\n')
     curstring = ""
-    while not curstring.find('<li id="post-'+str(postnum))!=-1:
+    while not curstring.find('<li id="post-'+str(postnum)) != -1:
         curstring = filein.next()
-    while not curstring.find("<article>")!=-1:
+    while not curstring.find("<article>") != -1:
         curstring = filein.next()
-    while not curstring.find("</article>")!=-1:
+    while not curstring.find("</article>") != -1:
         curstring = filein.next()
-        if not curstring.find("</article>")!=-1:
+        if not curstring.find("</article>") != -1:
             fileout.write(curstring)
     fileout.write('\n<br>\n')
     if prevf != "-":
@@ -40,8 +42,9 @@ if "-fv" in sys.argv or "-vf" in sys.argv:
     force_update = True
     source_site = "https://forums.sufficientvelocity.com/posts/"
 # This is the file we are getting our data from.
-dataf = file(datafname,"r")
+dataf = file(datafname, "r")
 maindata = dataf.next().strip().split(',')
+maindata = map(lambda x: x.replace(';', ','), maindata)
 dirname = maindata[2]+"/"
 try:
     os.mkdir(maindata[2])
@@ -52,13 +55,15 @@ fulldata = [0]*maindata[1]
 fullchdata = [0]*maindata[1]
 for i in range(maindata[1]):
     fullchdata[i] = dataf.next().strip().split(',')
+    fullchdata[i] = map(lambda x: x.replace(';', ','), fullchdata[i])
     fullchdata[i][1] = int(fullchdata[i][1])
     fulldata[i] = [0]*fullchdata[i][1]
     for j in range(fullchdata[i][1]):
         fulldata[i][j] = dataf.next().strip().split(',')
+        fulldata[i][j] = map(lambda x: x.replace(';', ','), fulldata[i][j])
         fulldata[i][j][2] = fullchdata[i][2]+"_"+fulldata[i][j][2]+".html"
 indexfname = 'index.html'
-indexf = file(dirname+indexfname,"w")
+indexf = file(dirname+indexfname, "w")
 indexf.write('<b><u>'+maindata[0]+'</u></b><br>\n<br>\n')
 for i in range(maindata[1]):
     indexf.write('<u>'+fullchdata[i][0]+'</u><br>')
@@ -80,18 +85,36 @@ for i in range(maindata[1]):
             nextf = fulldata[i][j+1][2]
         if not force_update and nextf != "-":
             try:
-                tempf = file(dirname+nextf,"r")
+                tempf = file(dirname+nextf, "r")
                 tempf.close()
             except:
                 print "Downloading " + fulldata[i][j][0] + "... "
-                os.system('wget -q -O temp.html -- '+source_site+fulldata[i][j][1])
-                trim(fulldata[i][j][1],"temp.html",dirname+fulldata[i][j][2],prevf,indexfname,nextf)
+                os.system(
+                    'wget -q -O temp.html -- ' +
+                    source_site+fulldata[i][j][1])
+                trim(
+                    fulldata[i][j][1],
+                    "temp.html",
+                    dirname+fulldata[i][j][2],
+                    prevf,
+                    indexfname,
+                    nextf)
         else:
             print "Downloading " + fulldata[i][j][0] + "... "
-            os.system('wget -q -O temp.html -- https://forums.spacebattles.com/posts/'+fulldata[i][j][1])
-            trim(fulldata[i][j][1],"temp.html",dirname+fulldata[i][j][2],prevf,indexfname,nextf)
-        indexf = file(dirname+indexfname,"a")
-        indexf.write('<a href='+fulldata[i][j][2]+'>'+fulldata[i][j][0]+'</a><br>')
+            os.system(
+                'wget -q -O temp.html ' +
+                '-- https://forums.spacebattles.com/posts/' +
+                fulldata[i][j][1])
+            trim(
+                fulldata[i][j][1],
+                "temp.html",
+                dirname+fulldata[i][j][2],
+                prevf,
+                indexfname,
+                nextf)
+        indexf = file(dirname+indexfname, "a")
+        indexf.write(
+            '<a href='+fulldata[i][j][2]+'>'+fulldata[i][j][0]+'</a><br>')
         print fulldata[i][j][0] + " Complete."
     indexf.write('<br>')
 try:
